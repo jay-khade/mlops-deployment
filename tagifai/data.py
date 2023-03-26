@@ -124,4 +124,4 @@ class LabelEncoder(object):
         """load json file"""
         with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
-            return cls(**kwargs)
+        return cls(**kwargs)
