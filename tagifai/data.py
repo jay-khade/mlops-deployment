@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from collections import Counter
 import json
+from sklearn.model_selection import train_test_split
 
 from config import config
 
@@ -125,3 +126,17 @@ class LabelEncoder(object):
         with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
+
+
+# Data splitting
+
+def get_data_splits(X, y, train_size=0.7):
+    """Split data into train test and validation set"""
+
+    # train set
+    X_train, X_, y_train, y_ = train_test_split(X, y, train_size=train_size, stratify=y)
+
+    # validation and test set
+    X_val, X_test, y_val, y_test = train_test_split(X_, y_, train_size=0.5, stratify=y_)
+
+    return X_train, X_val, X_test, y_train, y_val, y_test
