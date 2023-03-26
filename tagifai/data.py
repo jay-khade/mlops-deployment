@@ -2,8 +2,10 @@
 
 from nltk.stem import PorterStemmer
 import re
+import numpy as np
 import pandas as pd
 from collections import Counter
+import json
 
 from config import config
 
@@ -60,3 +62,66 @@ def replace_minority_labels(df, label_col, min_freq, new_label="other"):
     df[label_col] = df[label_col].fillna(new_label)
 
     return df
+
+
+# custom label encoding
+
+class LabelEncoder(object):
+    """ Encode Labels into unique indices"""
+
+    def __int__(self, class_to_index={}):
+        """define class variables"""
+        self.class_to_index = class_to_index
+        self.index_to_class = {v: k for k, v in self.class_to_index.items()}
+        self.classes = list(self.class_to_index.keys())
+
+    def __len__(self):
+        return len(self.class_to_index)
+
+    def __str__(self):
+        return f"<LabelEncoder(num_classes={len(self)})>"
+
+    def fit(self, y):
+        """learning from target y"""
+
+        classes = np.unique(y)
+        for i, class_ in enumerate(classes):
+            self.class_to_index[class_] = i
+        self.index_to_class = {v: k for k, v in self.class_to_index.items()}
+        self.classes = list(self.class_to_index.keys())
+        return self
+
+    # encode label
+    def encode(self, y):
+        """apply learning in fit function to encode labels"""
+
+        encoded = np.zeros((len(y)), dtype=int)
+        for i, item in enumerate(y):
+            encoded[i] = self.class_to_index[item]
+        return encoded
+
+    # decode label
+    def decode(self, y):
+        """Decode the encoded labels"""
+
+        classes = []
+        for i, item in enumerate(y):
+            classes.append(self.index_to_class[item])
+        return classes
+
+    # save encoding values
+    def save(self, fp):
+        """ Save encoded values in json"""
+
+        with open(fp, "w") as fp:
+            contents = {"class_to_index": self.class_to_index}
+            json.dump(contents, fp, indent=4, sort_keys=False)
+
+    # load file
+
+    @classmethod
+    def load(cls, fp):
+        """load json file"""
+        with open(fp, "r") as fp:
+            kwargs = json.load(fp=fp)
+            return cls(**kwargs)
