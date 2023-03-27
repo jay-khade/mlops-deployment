@@ -1,5 +1,5 @@
 # ------------------------- Importing Libraries ------------------------
-
+import mlflow
 from imblearn.over_sampling import RandomOverSampler
 import json
 import numpy as np
@@ -80,6 +80,9 @@ def train(args, df, trial=None):
                 f"train_loss: {train_loss:.5f},"
                 f"val_loss: {val_loss:.5f}"
             )
+
+        if not trial:
+            mlflow.log_metrics({"train_loss": train_loss, "val_loss": val_loss}, step=epoch)
 
         # pruning
         if trial:

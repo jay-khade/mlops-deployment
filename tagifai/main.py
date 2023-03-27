@@ -11,6 +11,8 @@ import mlflow
 from numpyencoder import NumpyEncoder
 import optuna
 from optuna.integration.mlflow import MLflowCallback
+import joblib
+import tempfile
 
 import warnings
 
@@ -39,7 +41,7 @@ def elt_data():
 
 
 # train model
-def train_model(args_fp="config/args.json"):
+def train_model(experiment_name, run_name, args_fp="config/args.json"):
     """Train a model given arguments"""
 
     # load labeled data
@@ -47,15 +49,39 @@ def train_model(args_fp="config/args.json"):
 
     # train
     args = Namespace(**utils.load_dict(filepath=args_fp))
-    artifacts = train.train(df=df, args=args)
-    performance = artifacts["performance"]
-    print(json.dumps(performance, indent=2))
+
+    # setting experiment
+    mlflow.set_experiment(experiment_name=experiment_name)
+    with mlflow.start_run(run_name=run_name):
+        run_id = mlflow.active_run().info.run_id
+        print(f"Run ID: {run_id}")
+
+        artifacts = train.train(df=df, args=args)
+        performance = artifacts["performance"]
+        print(json.dumps(performance, indent=2))
+
+        # log metrics and parameters
+        performance = artifacts["performance"]
+        mlflow.log_metrics({"precision": performance["overall"]["precision"]})
+        mlflow.log_metrics({"recall": performance["overall"]["recall"]})
+        mlflow.log_metrics({"f1": performance["overall"]["f1"]})
+        mlflow.log_params(vars(artifacts["args"]))
+
+        # log artifacts
+        with tempfile.TemporaryDirectory() as dp:
+            artifacts["label_encoder"].save(Path(dp, "label_encoder.json"))
+            joblib.dump(artifacts["vectorizer"], Path(dp, "vectorizer.pkl"))
+            joblib.dump(artifacts["model"], Path(dp, "model.pkl"))
+            utils.save_dict(performance, Path(dp,"performance.json"))
+            mlflow.log_artifacts(dp)
+
+    # Save to config
+    open(Path(config.CONFIG_DIR, "run_id.txt"), "w").write(run_id)
+    utils.save_dict(performance, Path(config.CONFIG_DIR, "performance.json"))
 
 
 # optimization
-def optimize(
-        args_fp: str = "config/args.json", study_name: str = "optimization", num_trials: int = 20
-) -> None:
+def optimize(args_fp: str = "config/args.json", study_name: str = "optimization", num_trials: int = 20) -> None:
     """Optimize hyperparameters.
     Args:
         args_fp (str): location of args.

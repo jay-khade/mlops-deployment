@@ -6,6 +6,5 @@ from pathlib import Path
 # main.train_model()
 
 
-# args_fp = Path(config.CONFIG_DIR, "args.json")
-main.optimize(num_trials=20)
+main.train_model(experiment_name="baselines", run_name="sgd")
 
