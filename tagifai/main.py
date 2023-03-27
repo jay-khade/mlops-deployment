@@ -2,9 +2,10 @@
 
 import pandas as pd
 from pathlib import Path
-
+import json
+from argparse import Namespace
+from tagifai import data,train,utils
 from config import config
-from tagifai import utils
 
 import warnings
 
@@ -14,7 +15,6 @@ warnings.filterwarnings("ignore")
 # ------------------- Defining core operations --------------------
 
 # import data
-
 def elt_data():
     """ Extract, Load and Transform our dataset"""
 
@@ -31,6 +31,20 @@ def elt_data():
     df = pd.merge(projects, tags, on="id")
     df = df[df.tag.notnull()]  # drop rows with no tags
     df.to_csv(Path(config.DATA_DIR, "labeled_projects.csv"), index=False)
+
+
+# train model
+def train_model(args_fp="config/args.json"):
+    """Train a model given arguments"""
+
+    # load labeled data
+    df = pd.read_csv(Path(config.DATA_DIR, "labeled_projects.csv"))
+
+    # train
+    args = Namespace(**utils.load_dict(filepath=args_fp))
+    artifacts = train.train(df=df, args=args)
+    performance = artifacts["performance"]
+    print(json.dumps(performance, indent=2))
 
 
 # ------------------------------------ calling function for main.py -----------------------------
