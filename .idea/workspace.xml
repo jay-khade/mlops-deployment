@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af47ab5f-db16-4429-868c-18f70e7dc3c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/model_training.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/args.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/args.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tagifai/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tagifai/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tagifai/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tagifai/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/predict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tagifai/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
