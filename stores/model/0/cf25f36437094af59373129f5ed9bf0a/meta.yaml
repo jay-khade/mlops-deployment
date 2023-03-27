@@ -1,0 +1,15 @@
+artifact_uri: file:///E:\mlops\stores\model/0/cf25f36437094af59373129f5ed9bf0a/artifacts
+end_time: 1679926255914
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: cf25f36437094af59373129f5ed9bf0a
+run_uuid: cf25f36437094af59373129f5ed9bf0a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1679926255882
+status: 3
+tags: []
+user_id: jaykh

@@ -2,6 +2,7 @@
 
 from pathlib import Path, PureWindowsPath, PurePath
 import pretty_errors
+import mlflow
 
 # ------------------ define key directory locations -------------------
 
@@ -15,6 +16,11 @@ BASE_DIR = Path(__file__).parent.parent.absolute()
 CONFIG_DIR = Path(BASE_DIR, 'config')
 DATA_DIR = Path(BASE_DIR, "data")
 
+# optimization results locations
+STORES_DIR = Path(BASE_DIR, "stores")
+MODEL_REGISTRY = Path(STORES_DIR, "model")
+MODEL_REGISTRY.mkdir(parents=True, exist_ok=True)
+mlflow.set_tracking_uri("file:///" + str(MODEL_REGISTRY.absolute()))
 
 # create directory
 DATA_DIR.mkdir(parents=True, exist_ok=True)

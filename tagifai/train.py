@@ -7,6 +7,9 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import log_loss
+import optuna
+from argparse import Namespace
+
 
 from tagifai import data, utils, predict, evaluate
 
@@ -78,6 +81,12 @@ def train(args, df, trial=None):
                 f"val_loss: {val_loss:.5f}"
             )
 
+        # pruning
+        if trial:
+            trial.report(val_loss,epoch)
+            if trial.should_prune():
+                raise optuna.TrialPruned()
+
     # threshold
     y_pred = model.predict(X_val)
     y_prob = model.predict_proba(X_val)
@@ -96,10 +105,35 @@ def train(args, df, trial=None):
         df=test_df
     )
 
-    return{
+    return {
         "args": args,
         "label_encoder": label_encoder,
         "vectorizer": vectorizer,
         "model": model,
         "performance": performance,
     }
+
+
+# optimization
+def objective(args: Namespace, df: pd.DataFrame, trial: optuna.trial._trial.Trial) -> float:
+    """Objective function for optimization trials"""
+
+    # parameters to tune
+    args.analyzer = trial.suggest_categorical("analyzer", ["word", "char", "char_wb"])
+    args.ngram_max_range = trial.suggest_int("ngram_max_range", 3, 10)
+    args.learning_rate = trial.suggest_loguniform("learning_rate", 1e-2, 1e0)
+    args.power_t = trial.suggest_uniform("power_t", 0.1, 0.5)
+
+    # train and evaluate
+    artifacts = train(args=args, df=df, trial=trial)
+
+    # set additional attribute
+    overall_performance = artifacts["performance"]["overall"]
+    print(json.dumps(overall_performance, indent=2))
+
+    trial.set_user_attr("precision", overall_performance["precision"])
+    trial.set_user_attr("recall", overall_performance["recall"])
+    trial.set_user_attr("f1", overall_performance["f1"])
+
+    return overall_performance["f1"]
+
