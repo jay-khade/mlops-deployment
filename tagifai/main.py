@@ -5,7 +5,7 @@ from pathlib import Path
 import json
 from typing import Dict
 from argparse import Namespace
-from tagifai import data, train, utils
+from tagifai import data, train, utils, predict
 from config import config
 import mlflow
 from numpyencoder import NumpyEncoder
@@ -13,6 +13,7 @@ import optuna
 from optuna.integration.mlflow import MLflowCallback
 import joblib
 import tempfile
+from config.config import logger
 
 import warnings
 
@@ -39,6 +40,8 @@ def elt_data():
     df = df[df.tag.notnull()]  # drop rows with no tags
     df.to_csv(Path(config.DATA_DIR, "labeled_projects.csv"), index=False)
 
+    logger.info("✅ Saved data!")
+
 
 # train model
 def train_model(experiment_name, run_name, args_fp="config/args.json"):
@@ -54,11 +57,11 @@ def train_model(experiment_name, run_name, args_fp="config/args.json"):
     mlflow.set_experiment(experiment_name=experiment_name)
     with mlflow.start_run(run_name=run_name):
         run_id = mlflow.active_run().info.run_id
-        print(f"Run ID: {run_id}")
+        logger.info(f"Run ID: {run_id}")
 
         artifacts = train.train(df=df, args=args)
         performance = artifacts["performance"]
-        print(json.dumps(performance, indent=2))
+        logger.info(json.dumps(performance, indent=2))
 
         # log metrics and parameters
         performance = artifacts["performance"]
@@ -69,10 +72,11 @@ def train_model(experiment_name, run_name, args_fp="config/args.json"):
 
         # log artifacts
         with tempfile.TemporaryDirectory() as dp:
+            utils.save_dict(vars(artifacts["args"]), Path(dp, "args.json"), cls=NumpyEncoder)
             artifacts["label_encoder"].save(Path(dp, "label_encoder.json"))
             joblib.dump(artifacts["vectorizer"], Path(dp, "vectorizer.pkl"))
             joblib.dump(artifacts["model"], Path(dp, "model.pkl"))
-            utils.save_dict(performance, Path(dp,"performance.json"))
+            utils.save_dict(performance, Path(dp, "performance.json"))
             mlflow.log_artifacts(dp)
 
     # Save to config
@@ -107,11 +111,51 @@ def optimize(args_fp: str = "config/args.json", study_name: str = "optimization"
     trials_df = trials_df.sort_values(["user_attrs_f1"], ascending=False)
     args = {**args.__dict__, **study.best_trial.params}
     utils.save_dict(d=args, filepath=args_fp, cls=NumpyEncoder)
-    print(f"\nBest value (f1): {study.best_trial.value}")
-    print(f"Best hyper parameters: {json.dumps(study.best_trial.params, indent=2)}")
+    logger.info(f"\nBest value (f1): {study.best_trial.value}")
+    logger.info(f"Best hyper parameters: {json.dumps(study.best_trial.params, indent=2)}")
 
+
+# load artifacts
+def load_artifacts(run_id):
+    """Load Artifacts for a given run_id"""
+
+    if not run_id:
+        run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+
+    # locate specific artifacts directory
+    # Locate specifics artifacts directory
+    experiment_id = mlflow.get_run(run_id=run_id).info.experiment_id
+    artifacts_dir = Path(config.MODEL_REGISTRY, experiment_id, run_id, "artifacts")
+
+    # Load objects from run
+    args = Namespace(**utils.load_dict(filepath=Path(artifacts_dir, "args.json")))
+    vectorizer = joblib.load(Path(artifacts_dir, "vectorizer.pkl"))
+    label_encoder = data.LabelEncoder.load(fp=Path(artifacts_dir, "label_encoder.json"))
+    model = joblib.load(Path(artifacts_dir, "model.pkl"))
+    performance = utils.load_dict(filepath=Path(artifacts_dir, "performance.json"))
+
+    return {
+        "args": args,
+        "label_encoder": label_encoder,
+        "vectorizer": vectorizer,
+        "model": model,
+        "performance": performance,
+    }
+
+
+# predict tags
+def predict_tag(text, run_id=None):
+    """Predict tags for text"""
+
+    if not run_id:
+        run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+
+    artifacts = load_artifacts(run_id=run_id)
+    prediction = predict.predict(texts=[text], artifacts=artifacts)
+    logger.info(json.dumps(prediction, indent=2))
+    return prediction
 
 # ------------------------------------ calling function for main.py -----------------------------
 
-if __name__ == "__main__":
-    elt_data()
+# if __name__ == "__main__":
+#     elt_data()

@@ -9,6 +9,6 @@
   "alpha": 0.0001,
   "learning_rate": 0.36684400216431984,
   "power_t": 0.16356335266342054,
-  "num_epochs": 200,
-  "threshold": 0.6892067388361494
+  "num_epochs": 100,
+  "threshold": 0.6891282343768564
 }

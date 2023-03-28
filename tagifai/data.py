@@ -154,10 +154,10 @@ class LabelEncoder:
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
-    def load(cls, fp: str):
+    def load(cls, fp):
         """Load instance of LabelEncoder from file.
         Args:
-            fp (str): JSON filepath to load from.
+            fp: JSON filepath to load from.
         Returns:
             LabelEncoder instance.
         """

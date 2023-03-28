@@ -5,8 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af47ab5f-db16-4429-868c-18f70e7dc3c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/artifacts/args.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/artifacts/label_encoder.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/artifacts/model.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/artifacts/performance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/artifacts/vectorizer.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/meta.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/metrics/f1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/metrics/precision" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/metrics/recall" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/metrics/train_loss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/metrics/val_loss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/alpha" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/analyzer" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/learning_rate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/lower" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/min_freq" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/ngram_max_range" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/num_epochs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/power_t" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/shuffle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/stem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/subset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/params/threshold" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/tags/mlflow.runName" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/tags/mlflow.source.git.commit" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/tags/mlflow.source.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/tags/mlflow.source.type" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/1e1d337a14ab4b77ac23263c143b12c5/tags/mlflow.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/artifacts/args.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/artifacts/label_encoder.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/artifacts/model.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/artifacts/performance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/artifacts/vectorizer.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/meta.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/metrics/f1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/metrics/precision" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/metrics/recall" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/metrics/train_loss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/metrics/val_loss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/alpha" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/analyzer" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/learning_rate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/lower" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/min_freq" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/ngram_max_range" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/num_epochs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/power_t" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/shuffle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/stem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/subset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/params/threshold" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/tags/mlflow.runName" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/tags/mlflow.source.git.commit" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/tags/mlflow.source.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/tags/mlflow.source.type" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/model/1/b8fbe9a02e144bd6b93abfbdf64a751b/tags/mlflow.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/args.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/args.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/run_id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/run_id.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tagifai/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tagifai/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tagifai/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tagifai/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagifai/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

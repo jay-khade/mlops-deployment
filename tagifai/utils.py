@@ -19,7 +19,7 @@ def set_seeds(seed=42):
 def load_dict(filepath):
     """Load a dictionary from jsons filepath"""
 
-    with open(filepath, "r") as fp:
+    with open(filepath) as fp:
         d = json.load(fp)
 
     return d

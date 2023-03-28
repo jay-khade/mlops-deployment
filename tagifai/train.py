@@ -9,6 +9,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import log_loss
 import optuna
 from argparse import Namespace
+from config.config import logger
 
 
 from tagifai import data, utils, predict, evaluate
@@ -75,7 +76,7 @@ def train(args, df, trial=None):
         val_loss = log_loss(y_val, model.predict_proba(X_val))
 
         if not epoch % 10:
-            print(
+            logger.info(
                 f"Epoch: {epoch:02d} | "
                 f"train_loss: {train_loss:.5f},"
                 f"val_loss: {val_loss:.5f}"
@@ -132,7 +133,7 @@ def objective(args: Namespace, df: pd.DataFrame, trial: optuna.trial._trial.Tria
 
     # set additional attribute
     overall_performance = artifacts["performance"]["overall"]
-    print(json.dumps(overall_performance, indent=2))
+    logger.info(json.dumps(overall_performance, indent=2))
 
     trial.set_user_attr("precision", overall_performance["precision"])
     trial.set_user_attr("recall", overall_performance["recall"])
