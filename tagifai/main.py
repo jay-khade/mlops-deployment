@@ -86,7 +86,7 @@ def train_model(experiment_name, run_name, args_fp="config/args.json"):
 
 # optimization
 def optimize(args_fp: str = "config/args.json", study_name: str = "optimization", num_trials: int = 20) -> None:
-    """Optimize hyperparameters.
+    """Optimize hyper-parameters.
     Args:
         args_fp (str): location of args.
         study_name (str): name of optimization study.
